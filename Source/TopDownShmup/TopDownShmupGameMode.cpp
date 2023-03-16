@@ -17,3 +17,6 @@ ATopDownShmupGameMode::ATopDownShmupGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+
+

@@ -17,6 +17,8 @@ public:
     
     //looking
     void UpdateMouseLook();
+	void OnStartFire();
+	void OnStopFire();
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -36,9 +38,6 @@ protected:
 	/** Navigate player to the given world location. */
 	void SetNewMoveDestination(const FVector DestLocation);
 
-	/** Input handlers for SetDestination action. */
-	void OnSetDestinationPressed();
-	void OnSetDestinationReleased();
 };
 
 

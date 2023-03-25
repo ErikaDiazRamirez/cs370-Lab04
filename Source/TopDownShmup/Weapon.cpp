@@ -2,6 +2,9 @@
 
 
 #include "Weapon.h"
+#include "Components/AudioComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values
 AWeapon::AWeapon()
@@ -30,10 +33,37 @@ void AWeapon::Tick(float DeltaTime)
 
 void AWeapon::OnStartFire()
 {
-    
+    FireAC = PlayWeaponSound(FireLoopSound);
+    FireFX = UGameplayStatics::SpawnEmitterAttached(MuzzleFX, WeaponMesh, TEXT("MuzzleFlashSocket"));
 }
 
 void AWeapon::OnStopFire()
 {
-    
+    if (FireAC) 
+    {
+        FireAC->Stop();
+        PlayWeaponSound(FireFinishSound);
+        FireFX->DeactivateSystem();
+    }
+ }
+
+
+
+UAudioComponent* AWeapon::PlayWeaponSound(USoundCue* Sound)
+
+{
+
+    UAudioComponent* AC = NULL;
+
+    if (Sound)
+
+    {
+
+        AC = UGameplayStatics::SpawnSoundAttached(Sound, RootComponent);
+
+    }
+
+    return AC;
+
 }
+

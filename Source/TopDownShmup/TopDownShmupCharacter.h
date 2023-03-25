@@ -30,7 +30,10 @@ public:
     UPROPERTY(EditAnywhere, Category = Weapon)
     TSubclassOf<AWeapon> WeaponClass;
     
-    //void BeginPlay() override;
+    void BeginPlay() override;
+
+	void OnStartFire();
+	void OnStopFire();
     
 private:
     AWeapon* MyWeapon;

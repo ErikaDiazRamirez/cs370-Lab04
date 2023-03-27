@@ -88,6 +88,8 @@ void ATopDownShmupCharacter::BeginPlay()
 		}
 
 	}
+	//set the pawn in weapon class to our character?
+	MyWeapon->MyPawn = this;
 
 }
 

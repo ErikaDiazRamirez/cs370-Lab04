@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "TimerManager.h"
 #include "AssaultWeapon.h"
 
 AAssaultWeapon::AAssaultWeapon()
@@ -13,12 +13,16 @@ AAssaultWeapon::AAssaultWeapon()
 void AAssaultWeapon::OnStartFire()
 {
     Super::OnStartFire();
+    
+    //this breaks
+    GetWorldTimerManager().SetTimer(MemberTimerHandle, this, &AAssaultWeapon::WeaponTrace, FireRate, true);
 }
 
 
 void AAssaultWeapon::OnStopFire()
 {
     Super::OnStopFire();
+    GetWorldTimerManager().ClearTimer(MemberTimerHandle);
 }
 
 
@@ -40,7 +44,7 @@ void AAssaultWeapon::WeaponTrace()
 
     // Calculate end position
 
-    FVector EndPos = /*TODO: Figure out vector math based on the WeaponRange*/;
+    FVector EndPos = StartPos + Forward * WeaponRange;
 
     // Perform line trace to retrieve hit info
 
@@ -61,7 +65,7 @@ void AAssaultWeapon::WeaponTrace()
     {
 
         // TODO: Actually do something
-
+        UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint);
     }
 
 }

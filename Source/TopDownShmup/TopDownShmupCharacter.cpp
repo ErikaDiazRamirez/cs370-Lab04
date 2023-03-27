@@ -72,7 +72,8 @@ void ATopDownShmupCharacter::BeginPlay()
 			MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector::ZeroVector,
 
 				Rotation, SpawnParams);
-
+            //set the pawn in weapon class to our character?
+            MyWeapon->MyPawn = this;
 			if (MyWeapon)
 
 			{
@@ -82,14 +83,14 @@ void ATopDownShmupCharacter::BeginPlay()
 				// NOTE: This should probably be a blueprint parameter
 
 				MyWeapon->WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("WeaponPoint"));
+                
 
 			}
 
 		}
 
 	}
-	//set the pawn in weapon class to our character?
-	MyWeapon->MyPawn = this;
+	
 
 }
 

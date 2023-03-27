@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Weapon.h"
 #include "TopDownShmupCharacter.h"
+#include "Kismet/GameplayStatics.h"
 #include "AssaultWeapon.generated.h"
 
 /**
@@ -19,14 +20,16 @@ public:
     AAssaultWeapon();
     virtual void OnStartFire() override;
     virtual void OnStopFire() override;
-
+    
 
     float FireRate;
     float WeaponRange;
 
     UPROPERTY(EditDefaultsOnly)
     UParticleSystem* HitEffect;
-
+    
+    FTimerHandle MemberTimerHandle;
+    
 protected:
     void WeaponTrace();
 

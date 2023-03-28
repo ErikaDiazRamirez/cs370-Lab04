@@ -20,20 +20,24 @@ UCLASS()
 class TOPDOWNSHMUP_API AAIDwarfController : public AAIEnemyController
 {
 	GENERATED_BODY()
-	
     
     ATopDownShmupCharacter* ShmupPlayer;
     APawn* MyPawn;
-    EDwarfState CurrentState;
     APawn* ShmupPlayerActor;
+    float range = 150.0f;
+
+    //Dwarf state 
+    EDwarfState GetCurrentState() const;
+    void SetCurrentState(EDwarfState NewState);
     
     virtual void OnPossess(APawn*) override;
-    
     virtual void BeginPlay() override;
-    
+    virtual void Tick(float DeltaTime) override;
     virtual void OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result) override;
     
-    void SetState();
-    
+private:
+    EDwarfState CurrentState;
+    void HandleNewState(EDwarfState NewState);
+    void Move();
     
 };

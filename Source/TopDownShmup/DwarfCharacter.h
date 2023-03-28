@@ -13,9 +13,9 @@ UCLASS()
 class TOPDOWNSHMUP_API ADwarfCharacter : public AEnemyCharacter
 {
 	GENERATED_BODY()
-    
-    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Enemy)
-    USkeletalMeshComponent* DwarfMesh;
+public:
+//    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Enemy)
+//    USkeletalMeshComponent* DwarfMesh;
     
     ADwarfCharacter();
     

@@ -8,6 +8,6 @@ ADwarfCharacter::ADwarfCharacter()
 {
     AIControllerClass = AAIDwarfController::StaticClass();
     
-    DwarfMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Dwarf"));
-    RootComponent = DwarfMesh;
+//    DwarfMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Dwarf"));
+//    RootComponent = DwarfMesh;
 }

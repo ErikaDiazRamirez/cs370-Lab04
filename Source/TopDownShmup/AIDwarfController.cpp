@@ -42,7 +42,7 @@ void AAIDwarfController::Tick(float DeltaTime)
     
     if(ShmupPlayer != nullptr)
     {
-        GEngine->AddOnScreenDebugMessage(1, 2, FColor::Green, FString::Printf(TEXT("LETE")));
+        //GEngine->AddOnScreenDebugMessage(1, 2, FColor::Green, FString::Printf(TEXT("LETE")));
 
         if(ShmupPlayer->IsDead())
         {
@@ -54,11 +54,12 @@ void AAIDwarfController::Tick(float DeltaTime)
             return;
         }
     }
+    
 }
 
 void AAIDwarfController::OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result)
 {
-    GEngine->AddOnScreenDebugMessage(1, 2, FColor::Green, FString::Printf(TEXT("MOVE COMPLETE")));
+   //GEngine->AddOnScreenDebugMessage(1, 2, FColor::Green, FString::Printf(TEXT("MOVE COMPLETE")));
     SetCurrentState(EDwarfState::EAttacking);
 }
 

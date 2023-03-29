@@ -30,6 +30,9 @@ public:
 
     UPROPERTY(EditAnywhere, Category = Weapon)
     TSubclassOf<AWeapon> WeaponClass;
+
+    UPROPERTY(EditDefaultsOnly)
+        UAnimMontage* DeathAnim;
     
     void BeginPlay() override;
     virtual float TakeDamage(float DamageAmount,
@@ -40,7 +43,12 @@ public:
 	void OnStopFire();
     
     bool bIsDead;
-    
+
+    FTimerHandle DeathTimerHandle;
+    void OnDeathAnimationFinished();
+
+    float deathTime = 0.0f;
+
     bool IsDead();
     
 private:

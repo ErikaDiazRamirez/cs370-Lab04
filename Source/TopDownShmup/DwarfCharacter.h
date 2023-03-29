@@ -27,9 +27,13 @@ public:
     UPROPERTY(EditAnywhere)
     float Damage = 10.0f;
     
-    float CurrentDamage;
+    float CurrentDamage = 0.0f;
     
-    FTimerHandle Timer;
+    float deathTime = 0.0f;
+
+    FTimerHandle TimerHandle;
+    FTimerHandle DeathTimerHandle;
+
     APawn* ShmupPlayerActor;
     
     ADwarfCharacter();
@@ -39,4 +43,6 @@ public:
     virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
                              class AController* EventInstigator, AActor * DamageCaused) 
                              override;
+    void OnDeathAnimationFinished();
+
 };

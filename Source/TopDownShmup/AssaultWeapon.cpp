@@ -52,7 +52,7 @@ void AAssaultWeapon::WeaponTrace()
         ADwarfCharacter* Dwarf = Cast<ADwarfCharacter>(Hit.GetActor());
         if (Dwarf)
         {
-        Dwarf->TakeDamage(Damage, FDamageEvent(), GetInstigatorController(), this);
+            Dwarf->TakeDamage(Damage, FDamageEvent(), GetInstigatorController(), this);
         }
     }
 }

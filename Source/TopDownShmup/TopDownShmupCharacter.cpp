@@ -70,9 +70,7 @@ void ATopDownShmupCharacter::BeginPlay()
 
 			// Spawn the Weapon
 
-			MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector::ZeroVector,
-
-				Rotation, SpawnParams);
+			MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector::ZeroVector, Rotation, SpawnParams);
             //set the pawn in weapon class to our character?
             MyWeapon->MyPawn = this;
 			if (MyWeapon)
@@ -144,6 +142,13 @@ AController* EventInstigator, AActor* DamageCauser)
             // We're dead
 
             SetCanBeDamaged(false); // Don't allow further damage
+			deathTime = PlayAnimMontage(DeathAnim);
+
+			//not sure how to do the timer 
+			// ShmupPlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+			GetWorldTimerManager().SetTimer(DeathTimerHandle, this, &ATopDownShmupCharacter::OnDeathAnimationFinished, deathTime - .25f, false);
+
 
             // TODO: Process death
 
@@ -162,4 +167,11 @@ AController* EventInstigator, AActor* DamageCauser)
 bool ATopDownShmupCharacter::IsDead()
 {
        return bIsDead;
+}
+
+
+void ATopDownShmupCharacter::OnDeathAnimationFinished()
+{
+	Destroy();
+	GetWorldTimerManager().ClearTimer(DeathTimerHandle);
 }

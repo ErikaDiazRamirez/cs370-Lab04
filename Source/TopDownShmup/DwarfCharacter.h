@@ -10,9 +10,6 @@
 #include "TimerManager.h"
 #include "DwarfCharacter.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class TOPDOWNSHMUP_API ADwarfCharacter : public AEnemyCharacter
 {
@@ -20,6 +17,9 @@ class TOPDOWNSHMUP_API ADwarfCharacter : public AEnemyCharacter
 public:
     UPROPERTY(EditDefaultsOnly)
     UAnimMontage* AttackAnim;
+
+    UPROPERTY(EditDefaultsOnly)
+    UAnimMontage* DeathAnim;
     
     UPROPERTY(EditAnywhere)
     float Health = 20.0f;
@@ -32,13 +32,11 @@ public:
     FTimerHandle Timer;
     APawn* ShmupPlayerActor;
     
-    
     ADwarfCharacter();
     
     void StartAttack();
     void StopAttack();
-    virtual float TakeDamage(float DamageAmount,
-                             struct FDamageEvent const & DamageEvent,
-                             class AController * EventInstigator,
-                             AActor * DamageCaused) override;
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+                             class AController* EventInstigator, AActor * DamageCaused) 
+                             override;
 };

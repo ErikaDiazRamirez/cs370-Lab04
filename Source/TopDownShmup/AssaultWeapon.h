@@ -9,9 +9,6 @@
 #include "DwarfCharacter.h"
 #include "AssaultWeapon.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class TOPDOWNSHMUP_API AAssaultWeapon : public AWeapon
 {
@@ -22,7 +19,6 @@ public:
     virtual void OnStartFire() override;
     virtual void OnStopFire() override;
     
-
     float FireRate;
     float WeaponRange;
 
@@ -36,5 +32,4 @@ public:
     
 protected:
     void WeaponTrace();
-
 };

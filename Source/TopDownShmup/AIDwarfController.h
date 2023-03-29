@@ -8,10 +8,6 @@
 #include "DwarfCharacter.h"
 #include "AIDwarfController.generated.h"
 
-/**
- * 
- */
-
 enum class EDwarfState : short
 {
     EStart, EChasing, EAttacking, EDead, EUnknown
@@ -42,5 +38,4 @@ private:
     EDwarfState CurrentState;
     void HandleNewState(EDwarfState NewState);
     void Move();
-    
 };

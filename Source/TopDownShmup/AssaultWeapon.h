@@ -6,6 +6,7 @@
 #include "Weapon.h"
 #include "TopDownShmupCharacter.h"
 #include "Kismet/GameplayStatics.h"
+#include "DwarfCharacter.h"
 #include "AssaultWeapon.generated.h"
 
 /**
@@ -27,6 +28,9 @@ public:
 
     UPROPERTY(EditDefaultsOnly)
     UParticleSystem* HitEffect;
+    
+    UPROPERTY(EditAnywhere)
+    float Damage = 2.0f;
     
     FTimerHandle MemberTimerHandle;
     

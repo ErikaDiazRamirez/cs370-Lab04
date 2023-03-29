@@ -17,7 +17,8 @@ class ATopDownShmupCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
-    
+    UPROPERTY(EditAnywhere)
+    float Health = 100.0f;
 
 public:
 	ATopDownShmupCharacter();
@@ -31,9 +32,16 @@ public:
     TSubclassOf<AWeapon> WeaponClass;
     
     void BeginPlay() override;
-
+    virtual float TakeDamage(float DamageAmount,
+                             struct FDamageEvent const & DamageEvent,
+                             class AController * EventInstigator,
+                             AActor * DamageCaused) override;
 	void OnStartFire();
 	void OnStopFire();
+    
+    bool bIsDead;
+    
+    bool IsDead();
     
 private:
     AWeapon* MyWeapon;

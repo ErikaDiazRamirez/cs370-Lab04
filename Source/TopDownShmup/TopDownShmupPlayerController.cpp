@@ -113,8 +113,13 @@ void ATopDownShmupPlayerController::MoveRight(float Value)
 void ATopDownShmupPlayerController::UpdateMouseLook()
 {
     APawn* const Pawn = GetPawn();
+    
     if (Pawn)
     {
+        if(IsLookInputIgnored())
+        {
+            return;
+        }
         // Trace to see what is under the mouse cursor
         FHitResult Hit;
         GetHitResultUnderCursor(ECC_Visibility, false, Hit);

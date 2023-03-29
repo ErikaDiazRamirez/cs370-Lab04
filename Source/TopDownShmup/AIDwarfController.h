@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AIEnemyController.h"
 #include "TopDownShmupCharacter.h"
+#include "DwarfCharacter.h"
 #include "AIDwarfController.generated.h"
 
 /**
@@ -24,6 +25,7 @@ class TOPDOWNSHMUP_API AAIDwarfController : public AAIEnemyController
     ATopDownShmupCharacter* ShmupPlayer;
     APawn* MyPawn;
     APawn* ShmupPlayerActor;
+    ADwarfCharacter* MyDwarf;
     float range = 150.0f;
 
     //Dwarf state 
@@ -31,6 +33,7 @@ class TOPDOWNSHMUP_API AAIDwarfController : public AAIEnemyController
     void SetCurrentState(EDwarfState NewState);
     
     virtual void OnPossess(APawn*) override;
+    virtual void OnUnPossess() override;
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
     virtual void OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result) override;

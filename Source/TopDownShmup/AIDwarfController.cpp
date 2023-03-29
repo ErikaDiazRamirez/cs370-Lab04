@@ -9,7 +9,15 @@ void AAIDwarfController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
     MyPawn = InPawn;
+    MyDwarf = Cast<ADwarfCharacter>(MyPawn);
 }
+
+void AAIDwarfController::OnUnPossess()
+{
+    Super::OnUnPossess();
+    PrimaryActorTick.bCanEverTick = false;
+}
+
 
 void AAIDwarfController::BeginPlay()
 {
@@ -18,7 +26,7 @@ void AAIDwarfController::BeginPlay()
     ShmupPlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     MoveToActor(ShmupPlayerActor, 5.0f);
 
-    //ShmupPlayer = Cast<ATopDownShmupCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+    ShmupPlayer = Cast<ATopDownShmupCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 }
 
 void AAIDwarfController::Tick(float DeltaTime) 
@@ -30,6 +38,21 @@ void AAIDwarfController::Tick(float DeltaTime)
     }
     if ((GetCurrentState() == EDwarfState::EAttacking) && (ShmupPlayerActor->GetDistanceTo(MyPawn) > range)) {
         SetCurrentState(EDwarfState::EChasing);
+    }
+    
+    if(ShmupPlayer != nullptr)
+    {
+        GEngine->AddOnScreenDebugMessage(1, 2, FColor::Green, FString::Printf(TEXT("LETE")));
+
+        if(ShmupPlayer->IsDead())
+        {
+            if(GetCurrentState() == EDwarfState::EAttacking)
+            {
+                MyDwarf->StopAttack();
+                SetCurrentState(EDwarfState::EUnknown);
+            }
+            return;
+        }
     }
 }
 
@@ -49,28 +72,37 @@ EDwarfState AAIDwarfController::GetCurrentState() const
 void AAIDwarfController::SetCurrentState(EDwarfState NewState)
 {
     CurrentState = NewState;
-    HandleNewState(NewState);
+    HandleNewState(CurrentState);
 }
 
 void AAIDwarfController::HandleNewState(EDwarfState NewState)
 {
     switch (NewState)
     {
+        case EDwarfState::EStart:
+        {
+            //call move function
+            break;
+        }
+        break;
+        
         case EDwarfState::EChasing:
         {
             //call move function
+            MyDwarf->StopAttack();
             Move();
         }
         break;
 
         case EDwarfState::EAttacking:
         {
-            
+                MyDwarf->StartAttack();
         }
         break;
 
         case EDwarfState::EDead:
         {
+            MyDwarf->StopAttack();
             //call move function
         }
         break;
@@ -88,5 +120,5 @@ void AAIDwarfController::Move()
 {
     ShmupPlayerActor = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     MoveToActor(ShmupPlayerActor, 5.0f);
-    SetCurrentState(EDwarfState::EChasing);
+    //SetCurrentState(EDwarfState::EChasing);
 }

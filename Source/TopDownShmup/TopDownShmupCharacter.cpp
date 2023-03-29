@@ -32,6 +32,7 @@ ATopDownShmupCharacter::ATopDownShmupCharacter()
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+    bIsDead = false;
 }
 
 void ATopDownShmupCharacter::BeginPlay()
@@ -96,17 +97,69 @@ void ATopDownShmupCharacter::BeginPlay()
 
 void ATopDownShmupCharacter::OnStartFire()
 {
-	if(MyWeapon)
+	if(MyWeapon && (!IsDead()))
 	{
 		MyWeapon->OnStartFire();
 	}
+    else
+    {
+        MyWeapon->OnStopFire();
+    }
 }
 
 void ATopDownShmupCharacter::OnStopFire()
 {
-	if (MyWeapon)
+	if (MyWeapon && (!IsDead()))
 	{
 		MyWeapon->OnStopFire();
 	}
 	
+}
+
+
+float ATopDownShmupCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent,
+
+AController* EventInstigator, AActor* DamageCauser)
+
+{
+
+    float ActualDamage = Super::TakeDamage(Damage, DamageEvent,
+
+    EventInstigator, DamageCauser);
+
+    if (ActualDamage > 0.0f)
+
+    {
+
+        //TODO: Add a debug message on screen to know dwarf got hit
+
+        //Reduce health points
+
+        Health -= ActualDamage;
+
+        if (Health <= 0.0f)
+
+        {
+
+            // We're dead
+
+            SetCanBeDamaged(false); // Don't allow further damage
+
+            // TODO: Process death
+
+            bIsDead = true;
+            UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetIgnoreLookInput(true);
+            UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetIgnoreMoveInput(true);
+            
+        }
+
+    }
+
+    return ActualDamage;
+
+}
+
+bool ATopDownShmupCharacter::IsDead()
+{
+       return bIsDead;
 }

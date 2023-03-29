@@ -66,6 +66,16 @@ void AAssaultWeapon::WeaponTrace()
 
         // TODO: Actually do something
         UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint);
+        
+        ADwarfCharacter* Dwarf = Cast<ADwarfCharacter>(Hit.GetActor());
+
+        if (Dwarf)
+
+        {
+
+        Dwarf->TakeDamage(Damage, FDamageEvent(), GetInstigatorController(), this);
+
+        }
     }
 
 }

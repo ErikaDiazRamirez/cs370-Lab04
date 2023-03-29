@@ -1,10 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+/*
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/TargetPoint.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include "DwarfCharacter.h"
 #include "Math/UnrealMathUtility.h"
 #include "SpawnManager.generated.h"
@@ -46,3 +47,4 @@ public:
 private:
 	ADwarfCharacter* MyDwarf;
 };
+*/

@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+/*
 
 #include "SpawnManager.h"
 
 void ASpawnManager::SpawnCharacter()
 {
-	if (CharacterSpawn)
+	if (DwarfClass)
 
 	{
 
@@ -21,7 +21,7 @@ void ASpawnManager::SpawnCharacter()
 
 			SpawnParams.Instigator = GetInstigator();
 
-			int Index = FMath::RandRange(0, targetPoints.Num()-1);
+			int Index = FMath::RandRange(0, 2);
 
 			ATargetPoint* NewLocation = targetPoints[Index];
 
@@ -32,7 +32,7 @@ void ASpawnManager::SpawnCharacter()
 			// Spawn the Weapon
 
 
-			MyDwarf = World->SpawnActor<ADwarfCharacter>(CharacterSpawn, LocationOfVector, Rotation, SpawnParams);
+			MyDwarf = World->SpawnActor<ADwarfCharacter>(DwarfClass, LocationOfVector, Rotation, SpawnParams);
       
 			MyDwarf->SpawnDefaultController();
 		}
@@ -63,3 +63,4 @@ void ASpawnManager::Tick(float DeltaTime)
 
 }
 
+*/
